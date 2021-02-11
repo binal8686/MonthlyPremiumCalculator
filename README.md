@@ -66,10 +66,9 @@ NEED TO COSIDER BELOW POINTS WHILE
  <img src="/Images/UI%20Page%20look.png">
  
  2) Monthly Premium Calculator - Screen while error in WebAPI Integration (image 2)
- 
- <img src="/Images/UI%20Page%20with%20error%20-%20Copy.png">
   
-    
+ <img src="/Images/UI%20Page%20with%20error.png">
+ 
  
  
  ## Design of Solution
