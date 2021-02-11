@@ -1,0 +1,97 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form #premiumForm="ngForm" class="formContainer">
+                <div *ngIf="isError" class="alert alert-danger">
+                    <div class="float-right" style="cursor: pointer" (click)="isError = !isError"></div>
+                    <strong>Internal Server Error! Please try again! (Or) Please make sure that Web API is running.
+                    </strong>
+                </div>
+                <div class="row form-group justify-content-center">
+                    <div class="col-4">
+                        <label for="name">Name</label>
+                        <span class="text-danger"> *</span>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" class="form-control" [(ngModel)]="premiumParamModel.Name" name="Name"
+                            id="name" placeholder="Enter name" pattern="^[a-zA-Z ]*" required>
+                        <div class="text-danger" *ngIf="formErrors.Name">
+                            <small>{{formErrors.Name}}</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group justify-content-center">
+                    <div class="col-4">
+                        <label for="dob">Date of Birth</label>
+                        <span class="text-danger"> *</span>
+                    </div>
+                    <div class="col-4">
+                        <input type="date" class="form-control" [(ngModel)]="premiumParamModel.DOB"
+                           name="DOB" id="dob" (change)="calculateAge($event.target.value)" 
+                           (change)="checkFutureDaet($event.target.value)"
+                           [max]="tomorrow"  placeholder="Enter dob" onkeydown="return false" required>
+                        <div class="text-danger" *ngIf="formErrors.DOB">
+                            <small> {{formErrors.DOB}} </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group justify-content-center">
+                    <div class="col-4">
+                        <label for="age">Age</label>
+                        <span class="text-danger"> *</span>
+                    </div>
+                    <div class="col-4">
+                        <input type="number" class="form-control" [(ngModel)]="premiumParamModel.Age" name="Age"
+                            id="age" placeholder="Enter age" readonly pattern="^[1-9]$|^[1-9][0-9]$|^[1-9][0-4][0-9]$" required>
+                        <div class="text-danger" *ngIf="formErrors.Age">
+                            <small> {{formErrors.Age}} </small>
+                        </div>
+                    </div>
+                </div>              
+                <div class="row form-group justify-content-center">
+                    <div class="col-4">
+                        <label for="deathSumInsured">Death - Sum Insured</label>
+                        <span class="text-danger"> *</span>
+                    </div>
+                    <div class="col-4">
+                    <input type="text" class="form-control" (change)="convertToCurrency($event.target.value)"
+                         [(ngModel)]="premiumParamModel.SumInsured"
+                            name="DeathInsured" id="DeathInsured" placeholder="Death Sum Insured" required>
+                        <div class="text-danger" *ngIf="formErrors.DeathInsured">
+                            <small> {{formErrors.DeathInsured }} </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group justify-content-center">
+                    <div class="col-4">
+                        <label for="occupation">Occupation</label>
+                        <span class="text-danger"> *</span>
+                    </div>
+                    <div class="col-4">
+                        <select id="occupation" name="Occupation" class="form-control"
+                            (change)="calculatePremiumValue($event.target.value)" required>
+                            <option value="0" selected>-- Choose -- </option>
+                            <option *ngFor="let o of allOccupations" [value]="o.Id">{{o.OccupationName}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row form-group justify-content-center">
+                    <div class="col-4">
+                        <label for="monthlyPremium"> Monthly Premium is :-</label>
+                    </div>
+                    <div class="col-4">
+                        <span>  {{monthlyPremium | currency}}</span>
+                    </div>
+                </div>
+                <div class="row form-group justify-content-center">
+                    <div class="col-4">
+                        
+                    </div>
+                    <div class="col-4">
+                        <span>  {{eMessage}}</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

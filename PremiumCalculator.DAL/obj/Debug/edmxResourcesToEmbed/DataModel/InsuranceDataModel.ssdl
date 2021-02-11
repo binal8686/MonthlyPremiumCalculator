@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InsuranceDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Occupation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OccupationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="OccupationRatingId" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="OccupationRating">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Rating" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Factor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_Occupation_OccupationRating">
+    <End Role="OccupationRating" Type="Self.OccupationRating" Multiplicity="1" />
+    <End Role="Occupation" Type="Self.Occupation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OccupationRating">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Occupation">
+        <PropertyRef Name="OccupationRatingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="InsuranceDbModelStoreContainer">
+    <EntitySet Name="Occupation" EntityType="Self.Occupation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OccupationRating" EntityType="Self.OccupationRating" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Occupation_OccupationRating" Association="Self.FK_Occupation_OccupationRating">
+      <End Role="OccupationRating" EntitySet="OccupationRating" />
+      <End Role="Occupation" EntitySet="Occupation" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="InsuranceDbModelStoreContainer" CdmEntityContainer="InsuranceDbEntities">
+    <EntitySetMapping Name="Occupations">
+      <EntityTypeMapping TypeName="InsuranceDbModel.Occupation">
+        <MappingFragment StoreEntitySet="Occupation">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OccupationName" ColumnName="OccupationName" />
+          <ScalarProperty Name="OccupationRatingId" ColumnName="OccupationRatingId" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OccupationRatings">
+      <EntityTypeMapping TypeName="InsuranceDbModel.OccupationRating">
+        <MappingFragment StoreEntitySet="OccupationRating">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="Factor" ColumnName="Factor" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
