@@ -28,8 +28,8 @@
                     <div class="col-4">
                         <input type="date" class="form-control" [(ngModel)]="premiumParamModel.DOB"
                            name="DOB" id="dob" (change)="calculateAge($event.target.value)" 
-                           (change)="checkFutureDaet($event.target.value)"
-                           [max]="tomorrow"  placeholder="Enter dob" onkeydown="return false" required>
+                           (change)="checkFutureDaet($event.target.value)" 
+                            [max]="tomorrow"  placeholder="Enter dob" onkeydown="return false" required>
                         <div class="text-danger" *ngIf="formErrors.DOB">
                             <small> {{formErrors.DOB}} </small>
                         </div>

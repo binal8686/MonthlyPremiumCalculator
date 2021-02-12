@@ -115,19 +115,20 @@ export class PremiumCalculatorComponent implements OnInit, AfterViewChecked {
 
 
   calculatePremiumValue(occupationId: number) {
-    if (occupationId == 0) this.monthlyPremium = 0;
-    
-    this.premiumParamModel.OccupationId = occupationId;
-    this.premiumCalculatorService.getPremiumValue(this.premiumParamModel).subscribe({
-      next: (data: any )=> {
-          this.monthlyPremium = data.Premium;
-          this.eMessage = data.Message;
-      },
-      error: error => {
-          this.eMessage = error.message;
-          console.error('There was an error!', error);
-      }
-  })
+      if (occupationId == 0) this.monthlyPremium = 0;
+        if(this.premiumForm.form.valid){
+        this.premiumParamModel.OccupationId = occupationId;
+        this.premiumCalculatorService.getPremiumValue(this.premiumParamModel).subscribe({
+          next: (data: any )=> {
+              this.monthlyPremium = data.Premium;
+              this.eMessage = data.Message;
+          },
+          error: error => {
+              this.eMessage = error.message;
+              console.error('There was an error!', error);
+          }
+      })
+    }
   }
 
 
@@ -135,10 +136,10 @@ export class PremiumCalculatorComponent implements OnInit, AfterViewChecked {
   { 
     if(DOB){
       const bdate = new Date(DOB);
-      var timeDiff = Math.abs(Date.now() - bdate.getTime());
+      var timeDiff = Math.abs(Date.now() - new Date(bdate).getTime())
       //Used Math.floor instead of Math.ceil
       //so 26 years and 140 days would be considered as 26, not 27.
-      this.premiumParamModel.Age = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
+      this.premiumParamModel.Age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
     }
   }
   checkFutureDaet(DOB: Date)
